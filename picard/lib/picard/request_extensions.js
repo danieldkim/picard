@@ -87,7 +87,10 @@ var request_extensions = {
     
     if(typeof(scope) == 'string')
       scope = { text: scope }
-    
+    else if (picard.env.scope_mixin) {
+      for (var k in picard.env.scope_mixin) scope[k] = picard.env.scope_mixin[k];
+    }
+                
     scope.status   = scope.status   || 200
     scope.headers  = scope.headers  || []
     scope.body     = scope.text     || scope.body || ''
