@@ -88,16 +88,7 @@ var request_extensions = {
     if(typeof(scope) == 'string')
       scope = { text: scope }
     else if (picard.env.scope_mixin) {
-      function create_mixin_func(k) {
-        return function() {
-          args = Array.prototype.slice.call(arguments);
-          args.push(scope);
-          return picard.env.scope_mixin[k].apply(scope, args);
-        }
-      }
-      for (var k in picard.env.scope_mixin) {
-        scope[k] = create_mixin_func(k);
-      }
+      for (var k in picard.env.scope_mixin) scope[k] = picard.env.scope_mixin[k];
     }
                 
     scope.status   = scope.status   || 200
